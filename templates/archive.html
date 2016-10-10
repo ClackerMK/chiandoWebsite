@@ -1,0 +1,23 @@
+{% extends 'ChianDoWebsite/frame_entry.html' %}
+{% block content %}
+<div class="mdl-card__media mdl-color-text--grey-50" id="text">
+     <h3>Archiv</h3>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    <div>
+    <a href="/">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">home</i>
+        </button>
+    </a></div>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+
+    <ul>
+        {% for blog in object_list %}
+        <li><a href="/b/{{ blog.id }}" >{{ blog.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'ChianDoWebsite/frame_entry.html' %}
+{% block content %}
+<div class="mdl-card__media mdl-color-text--grey-50"
+     {% if blog.thumbnail %}style="background-image: url({{ blog.thumbnail }})">
+     {% elif blog.gallery %}style="background-image: url({{ blog.gallery.gallerypicture_set.all|first }}
+         )">
+     {% elif blog.event %} id="event">
+     {% else %} id="text">
+     {% endif %}
+
+     <h3>{{ blog.name }}</h3>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    <div>
+    <a href="/">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">home</i>
+        </button>
+    </a></div>
+    {% if blog.event %}
+        <div>
+        <i class="material-icons">date_range</i>
+        {{ blog.event.start_date }}
+            {% if blog.event.end_date and blog.event.end_date != blog.event.start_date %}
+            - {{ blog.event.end_date }}
+            {% endif %}
+        </div>
+        <div style="width:20px"></div>
+        <div>
+        <i class="material-icons">alarm</i>
+        {{ blog.event.start_time }}
+            {% if blog.event.end_time and blog.event.end_time != blog.event.start_time %}
+             - {{ blog.event.end_time }}
+            {% endif %}
+        Uhr
+        </div>
+        {% if blog.event.place %}
+            <div style="width:20px"></div>
+            <div>
+            <i class="material-icons">room</i>
+            {{ blog.event.place }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+    {% if blog.gallery %}
+        <div id="rg-gallery" class="rg-gallery">
+            <div class="rg-thumbs">
+                <!-- Elastislide Carousel Thumbnail Viewer -->
+                <div class="es-carousel-wrapper">
+                    <div class="es-nav">
+                        <span class="es-nav-prev">Previous</span>
+                        <span class="es-nav-next">Next</span>
+                    </div>
+                    <div class="es-carousel">
+                        <ul>
+                            {%  for p in object.gallery.gallerypicture_set.all %}
+                            <li>
+                                <a href="#">
+                                    <img src="{{ p }}" data-large="{{ p }}" alt="image01""/>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Elastislide Carousel Thumbnail Viewer -->
+            </div><!-- rg-thumbs -->
+        </div><!-- rg-gallery -->
+    {% endif %}
+    <p>
+        {{ blog.text|safe }}
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'ChianDoWebsite/frame_entry.html' %}
+{% block content %}
+<div class="mdl-card__media mdl-color-text--grey-50" id="text">
+     <h3>Termine</h3>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    <div>
+    <a href="/">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">home</i>
+        </button>
+    </a></div>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table_cell--non-numeric">Termin</th>
+            <th class="mdl-data-table_cell--non-numeric">Datum</th>
+            <th class="mdl-data-table_cell--non-numeric">Startzeit</th>
+            <th class="mdl-data-table_cell--non-numeric">Endzeit</th>
+            <th class="mdl-data-table_cell--non-numeric">Ort</th>
+        </tr>
+        </thead>
+        {% for event in object_list %}
+        <a href="/b/{{ gallery.blog.id }}" >
+            <tr>
+                <td class="mdl-data-table_cell--non-numeric">{{ event.blog.name }}</td>
+                <td class="mdl-data-table_cell--non-numeric">{{ event.start_date }} {% if event.end_date and event.end_date != event.start_date %} - {{ event.end_date }} {% endif %}</td>
+                <td class="mdl-data-table_cell--non-numeric">{{ event.start_time }}</td>
+                <td class="mdl-data-table_cell--non-numeric">{{ event.end_time }}</td>
+                <td class="mdl-data-table_cell--non-numeric">{{ event.place }}</td>
+            </tr>
+        </a>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

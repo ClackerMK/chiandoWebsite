@@ -1,0 +1,26 @@
+{% extends 'ChianDoWebsite/frame_entry.html' %}
+{% block content %}
+<div class="mdl-card__media mdl-color-text--grey-50" id="text">
+     <h3>Galerien</h3>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    <div>
+    <a href="/">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">home</i>
+        </button>
+    </a></div>
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        {% for gallery in object_list %}
+        <tr>
+            <td><a href="/b/{{ gallery.blog.id }}" >{{ gallery.blog.name }}</a></td>
+            <td><img src="{{ gallery.gallerypicture_set.all|first }}"/></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

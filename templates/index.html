@@ -1,0 +1,31 @@
+{% extends 'frame_index.html' %}
+{% block posts %}
+    {% for blog in latest_blog_post%}
+        <div class="mdl-card mdl-cell
+        {% if blog.event %}event{% elif blog.gallery %}gallery{% else %}text{% endif %}
+        {%  if forloop.counter0 == 0 %}mdl-cell--10-col">{% else %}mdl-cell--6-col">{% endif %}
+
+        <div class="mdl-card__media mdl-color-text--grey-50"
+             {% if blog.thumbnail %}style="background-image: url({{ blog.thumbnail }})"
+             {% elif blog.gallery %}style="background-image: url({{ blog.gallery.gallerypicture_set.all|first }})"{% endif %}>
+                <h3><a href="b/{{ blog.id }}">{{ blog.name }}</a></h3>
+
+            </div>
+            <div class="mdl-color-text--grey-600 mdl-card__supporting-text">
+                {{ blog.text|safe|truncatewords:30 }}
+            </div>
+        </div>
+    {% endfor %}
+    {% if latest_blog_post.count|add:-9|divisibleby:5 %}
+    <nav class="demo-nav mdl-cell mdl-cell--12-col">
+        <div class="section-spacer"></div>
+
+        <a href="#?num= {{ latest_blog_post.count|add:5 }}" class="demo-nav__button" title="show more">
+            More
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <i class="material-icons" role="presentation">arrow_forward</i>
+            </button>
+        </a>
+    </nav>
+    {% endif %}
+{% endblock %}
